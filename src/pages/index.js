@@ -1,23 +1,26 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
+import Layout from "../components/layout/Layout"
 import BEMHelper from "react-bem-helper"
 import "../scss/home.scss"
 
 const bem = new BEMHelper('home');
 
 const Home = ({ data }) => (
-  <main {...bem()}>
-    <ul>
-      {data.allMarkdownRemark.edges.map(({ node }) => (
-        <li key={node.id}>
-          <Link to={node.fields.slug}>
-            <h2>{node.frontmatter.title}</h2>
-            <p>{node.excerpt}</p>
-          </Link>
-        </li>
-      ))}
-    </ul>
-  </main>
+  <Layout>
+    <main {...bem()}>
+      <ul>
+        {data.allMarkdownRemark.edges.map(({ node }) => (
+          <li key={node.id}>
+            <Link to={node.fields.slug}>
+              <h2>{node.frontmatter.title}</h2>
+              <p>{node.excerpt}</p>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </main>
+  </Layout>
 );
 
 export default Home;
